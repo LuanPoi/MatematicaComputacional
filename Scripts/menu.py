@@ -1,10 +1,13 @@
+# -*- coding: utf-8 -*-
 import os
 import sys
 import time
 from os.path import *
 
-clear = lambda: os.system('cls')
-path = "Objects"
+def clear():
+    os.system('cls' if os.name == 'nt' else 'clear') #usa um comando diferente dependendo do SO
+
+path = os.path.abspath(sys.argv[0]).replace('/menu.py', '')
 
 def menu():
     folderChoice = None
@@ -12,21 +15,18 @@ def menu():
     while True:
         clear()
         banner()
-        folders = getFolders(path)
+        folders = getFolders(path + "/Objects")
         print("Choose an option:")
         for counter in range(len(folders)):
             print(str(counter) + " - " + folders[counter])
         print("Q - quit")
         folderChoice = input("Option: ").lower()
-        if folderChoice == "q" or folderChoice == "quit":
-            clear()
-            sys.exit(0)
         if(folderChoice.isnumeric()):
             folderChoice = int(folderChoice)
             if(folderChoice >= 0 and folderChoice < len(folders)):
                 while True:
                     clear()
-                    currentPath = join(path, folders[folderChoice])
+                    currentPath = join(path + "/Objects", folders[folderChoice])
                     files = getFiles(currentPath)
                     banner()
                     print("Choose a script")
@@ -47,6 +47,9 @@ def menu():
                             continue
                     print("Erro: Entrada inválida.")
                     input()
+        elif folderChoice == "q" or folderChoice == "quit":
+            clear()
+            sys.exit(0)
 
 def getFolders(path):
     folders = []

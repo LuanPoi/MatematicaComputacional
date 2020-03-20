@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import numpy as np
 
 def f(x):
@@ -8,8 +9,8 @@ def printResultado(resultado, precisao):
     if (resultado == None):
         print("Raiz: Não Existe")
     else:
-        print("Raiz: " + resultado)
-        print("Precisão: " + precisao)
+        print("Raiz: " + str(resultado))
+        print("Precisão: " + str(precisao))
 
 def bisseccao(x, y, precisao):
     iteracoes = 0
