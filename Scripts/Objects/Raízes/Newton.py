@@ -25,7 +25,6 @@ class Newton:
             f = self.f(x)
             fLinha = self.fLinha(x)
             valores.append({ "X":x, "fX":f, "fLinhaX":fLinha })
-            debug = valores[len(valores) - 1]
             if(valores[len(valores) - 1]["fX"] == 0):
                 self.printResultado(x, 0)
                 return
