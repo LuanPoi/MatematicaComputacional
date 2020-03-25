@@ -1,39 +1,43 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 
-def f(x):
-    return ((np.power((x + 1) , 2) * np.exp(np.power(x, 2) - 2)) - 1)
+class Bisseccao:
+    def __init__(self, x, y, precisao):
+        self.bisseccao(x, y, precisao)
 
-def printResultado(resultado, precisao):
-    print("-- Resultado --")
-    if (resultado == None):
-        print("Raiz: Não Existe")
-    else:
-        print("Raiz: " + str(resultado))
-        print("Precisão: " + str(precisao))
+    def f(self, x):
+        return ((np.power((x + 1) , 2) * np.exp(np.power(x, 2) - 2)) - 1)
 
-def bisseccao(x, y, precisao):
-    iteracoes = 0
-    while True:
-        k = (x + y)/2
-
-        if f(x) * f(k) == 0:
-            printResultado(k, "Inf")
-            break
-        elif f(x) * f(k) < 0:
-            y = k
+    def printResultado(self, resultado, precisao):
+        print("-- Resultado --")
+        if (resultado == None):
+            print("Raiz: Não Existe")
         else:
-            x = k
+            print("Raiz: " + str(resultado))
+            print("Precisão: " + str(precisao))
 
-        j = (x + y)/2
-        if  abs(j-k)/abs(j) < precisao:
-            printResultado(k, precisao)
-            break
-        
-        iteracoes = iteracoes + 1
-        if (iteracoes >= 1000):
-            printResultado(None, None)
-            break
+    def bisseccao(self, x, y, precisao):
+        iteracoes = 0
+        while True:
+            k = (x + y)/2
+
+            if self.f(x) * self.f(k) == 0:
+                self.printResultado(k, "Inf")
+                break
+            elif self.f(x) * self.f(k) < 0:
+                y = k
+            else:
+                x = k
+
+            j = (x + y)/2
+            if  abs(j-k)/abs(j) < precisao:
+                self.printResultado(k, precisao)
+                break
+            
+            iteracoes = iteracoes + 1
+            if (iteracoes >= 1000):
+                self.printResultado(None, None)
+                break
 
 if __name__ == "__main__":
     print("--- MÉTODO DA BISSECÇÃO ---")
@@ -42,4 +46,4 @@ if __name__ == "__main__":
     y = float(input("Digite o valor de y:"))
     precisao = float(input("Digite a precisao:"))
     
-    bisseccao(x, y, precisao)
+    Bisseccao(x, y, precisao)
